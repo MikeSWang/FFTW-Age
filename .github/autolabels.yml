@@ -1,0 +1,25 @@
+# List automatically applied labels by GitHub Labeler.
+#
+# See configuration in ``.github/workflows/labeller.yml``.
+#
+build:
+- changed-files:
+  - any-glob-to-any-file:
+    - Makefile
+    - .github/workflows/ci.yml
+
+documentation:
+- changed-files:
+  - any-glob-to-any-file:
+    - README.*
+
+maintenance:
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/**/*.md
+    - CHANGELOG.md
+
+workflows:
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/**/*.yml

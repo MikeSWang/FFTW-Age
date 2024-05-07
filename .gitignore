@@ -1,0 +1,45 @@
+# Build
+# -----
+
+build/*
+
+## Objects
+*.o
+
+## Libraries
+*.a
+*.so
+
+## Executables
+*.out
+
+
+# Miscellaneous
+# -------------
+
+## Editors/explorers
+.vscode/
+.DS_Store
+
+## Notebooks
+.ipynb_checkpoints
+
+## Storage
+storage/*
+
+
+# Exclusions
+# ----------
+
+
+# Exceptions
+# ----------
+
+## Directories: .gitkeep (empty directories)
+!build/bin/
+build/bin/*
+!build/bin/.gitkeep
+
+!storage/wisdom/
+storage/wisdom/*
+!storage/wisdom/.gitkeep

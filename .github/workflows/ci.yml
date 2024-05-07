@@ -1,0 +1,108 @@
+# Perform continuous integration (CI) checks.
+#
+# CI tasks include but are not limited to:
+# - development builds (on all supported OS);
+# - unit/integration tests;
+# - code linting.
+#
+name: continuous-integration
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - include/**
+      - src/**
+      - main/**
+      - Makefile
+      - .gitignore
+      - .github/workflows/ci.yml
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - include/**
+      - src/**
+      - main/**
+      - Makefile
+      - .gitignore
+      - .github/workflows/ci.yml
+  pull_request_review:
+    types: [submitted, edited]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-dev:
+    name: Build (in dev mode)
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        compiler: [gcc, llvm]
+        exclude:
+          - os: ubuntu-latest
+            compiler: llvm
+
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 20
+
+    steps:
+      # HACK: GitHub macOS runner defaults to a broken release of Xcode.
+      # See https://github.com/actions/runner-images/issues/9273.
+      - name: Pin Xcode version (macOS)
+        if: runner.os == 'macOS'
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install C++ build dependency requirements
+        uses: knicknic/os-specific-run@v1.0.4
+        with:
+          linux: |
+            sudo apt-get update
+            sudo apt-get install -y libfftw3-dev
+          macos: |
+            # # Optional: Homebrew update is slow.
+            # brew update
+            brew install fftw libomp
+
+      - name: Build and install (Linux)
+        if: runner.os == 'Linux'
+        run: make clean; make -j -O install
+
+      - name: Build and install (macOS with GCC)
+        if: runner.os == 'macOS' && matrix.compiler == 'gcc'
+        run: |
+          # Override default compiler and OpenMP to GCC on macOS.
+          export CXX=$(find $(brew --prefix gcc)/bin -type f -name 'g++*')
+          # # Optional: Override ``-arch`` flags to exclude non-native
+          # # architectures, relevant for x86_64 architecture only.
+          # export ARCHFLAGS="-arch x86_64"
+          # # Optional: Eliminate linker version warning.
+          # export MACOSX_DEPLOYMENT_TARGET=10.9
+          # Build.
+          make clean; make -j install
+
+      - name: Build and install (macOS with LLVM)
+        if: runner.os == 'macOS' && matrix.compiler == 'llvm'
+        run: |
+          # Override default compiler and OpenMP to LLVM on macOS.
+          export CXX=$(brew --prefix llvm@15)/bin/clang++
+          export OMP_CXXFLAGS="-I$(brew --prefix libomp)/include -fopenmp"
+          export OMP_LDFLAGS="-L$(brew --prefix libomp)/lib -lomp"
+          # # Optional: Override ``-arch`` flags to exclude non-native
+          # # architectures, relevant for x86_64 architecture only.
+          # export ARCHFLAGS="-arch x86_64"
+          # # Optional: Eliminate linker version warning.
+          # export MACOSX_DEPLOYMENT_TARGET=10.9
+          # Build.
+          make clean; make -j install
