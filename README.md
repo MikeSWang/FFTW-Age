@@ -1,11 +1,11 @@
-# FFTW-Age: FFTW Wisdom Generation
+# ``FFTW-Age``: FFTW Wisdom Generation
 
-``FFTW-Age`` is a C++ software package for generating FFTW wisdom files.
+> _With age comes wisdom, but sometimes age comes alone._
+> &emsp;&mdash; Oscar Wilde
 
-
-## Documentation
-
-Coming soon...
+``FFTW-Age`` is a lightweight  C++ software package for generating FFTW wisdom
+files for OpenMP-multithreaded 3-d FFT transforms as a replacement for
+[`fftw-wisdom`]( https://www.fftw.org/fftw-wisdom.1.html).
 
 
 ## Installation
@@ -14,7 +14,8 @@ The C++ program can be set up with `make`, provided that dependency
 requirements are satisfied (FFTW3 and OpenMP libraries).
 
 > [!IMPORTANT]
-> Ensure the C++ compiler used supports OpenMP and is configured accordingly.
+> Ensure the C++ compiler used supports OpenMP and
+> the FFTW3 library is installed/configured accordingly.
 > The default [``Makefile``](Makefile) (located at the repository directory root)
 > assumes the GCC compiler and OpenMP library.
 
@@ -31,6 +32,35 @@ Then, execute in shell:
 ```console
 $ make clean && make install
 ```
+
+
+## Documentation
+
+Once installed, the FFTW-Age program can be called from the command line:
+
+```console
+$ fftw-age <tplan> <tdir> <dimx> <dimy> <dimz> <wisdom-dir>
+```
+
+where
+
+- `fftw-age` is assumed to be in the current working directory,
+  or else replace it with the correct path;
+- ``<tplan>`` corresponds to a FFTW planner flag,
+  with ``"m"`` for ``FFTW_MEASURE`` and ``"p"`` for ``FFTW_PATIENT``;
+- ``<tdir>`` is the transform direction,
+  either ``"f"`` for ``FFTW_FORWARD`` and ``"b"`` for ``FFTW_BACKWARD``;
+- ``<dimx>``, ``<dimy>`` and ``<dimz>`` are the dimensions of the 3-d transform;
+- ``<wisdom-dir>`` is the output wisdom file directory
+  (absolute or relative to the current working directory).
+
+The output wisdom file will have the filename
+``fftw_omp_<ttype><ttarr><tdir>_<dimx>x<dimy>x<dimz>_<tplan>.wisdom``.
+
+> [!IMPORTANT]
+> Only complex-to-complex, in-place transforms are currently supported.  Hence
+> ``<ttype>`` is fixed to ``"c"`` (complex-to-complex) and
+> ``<ttarr>`` is fixed to ``"i"`` (in-place) for now.
 
 
 ## Attribution
