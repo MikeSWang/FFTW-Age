@@ -246,4 +246,5 @@ clean: buildclean
 
 buildclean:
 	@echo "Cleaning up FFTW-Age C++ build..."
-	@find ${DIR_BUILD} -mindepth 1 -maxdepth 1 ! -name ".gitkeep" -exec rm -r {} +
+	@find ${DIR_BUILD} -mindepth 1 -maxdepth 1 \
+	    ! -name "bin" ! -name ".gitkeep" -exec rm -r {} +
