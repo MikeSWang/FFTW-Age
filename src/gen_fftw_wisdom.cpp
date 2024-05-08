@@ -74,43 +74,45 @@ void gen_fftw_wisdom(
   }
 
   // Plan FFTW.
-  bool flag_plan_generated = false;
+  bool flag_plan_gen = false;
+
+  fftw_complex* cgrid = nullptr;
+  double* rgrid = nullptr;
 
   fftw_plan_with_nthreads(nthreads);
+  fftw_plan transform;
 
   if (ttype == TransformType::C2C) {
-    fftw_complex* grid = fftw_alloc_complex(dimx * dimy * dimz);
-    fftw_plan_dft_3d(
-      dimx, dimy, dimz, grid, grid, tdir, tplan
-    );
-    flag_plan_generated = true;
+    cgrid = fftw_alloc_complex(dimx * dimy * dimz);
+    transform = fftw_plan_dft_3d(dimx, dimy, dimz, cgrid, cgrid, tdir, tplan);
+    flag_plan_gen = true;
   } else {
     throw InvalidTransformError(
         "Unsupported transform type: `ttype` = %d", ttype
     );
   }
 
-  if (!flag_plan_generated) {
+  if (!flag_plan_gen) {
     throw std::runtime_error("No FFTW plan has been generated");
   }
 
   // Export FFTW wisdom.
   std::FILE* wisdom_file_ptr = std::fopen(wisdom_file.c_str(), "w");
-
   if (wisdom_file_ptr == nullptr) {
     std::string err_mesg = "Failed to open FFTW wisdom file: " + wisdom_file;
     throw std::runtime_error(err_mesg.c_str());
   }
-
   fftw_export_wisdom_to_filename(wisdom_file.c_str());
-
-  if (wisdom_file_ptr != nullptr) {
-    std::fclose(wisdom_file_ptr);
-  }
 
   std::printf(
     "FFTW wisdom file has been exported: %s\n", wisdom_file.c_str()
   );
+
+  // Clean up.
+  if (wisdom_file_ptr != nullptr) {std::fclose(wisdom_file_ptr);}
+  if (flag_plan_gen) {fftw_destroy_plan(transform);}
+  if (cgrid != nullptr) {fftw_free(cgrid);}
+  if (rgrid != nullptr) {free(rgrid);}
 }
 
 }  // namespace fftw_age
