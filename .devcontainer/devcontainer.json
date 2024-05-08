@@ -10,7 +10,7 @@
             "channels": "conda-forge",
             "autoActivate": false,
             "envFile": "/tmp/conda-tmp/conda-env.yml",
-            "envName": "dev"
+            "envName": "fftw-age-dev"
         }
     },
     "onCreateCommand": "bash .devcontainer/onCreate.sh",

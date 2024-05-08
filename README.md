@@ -1,26 +1,26 @@
 # ``FFTW-Age``: FFTW Wisdom Generation
 
 > "_With age comes wisdom, but sometimes age comes alone._"
-> &emsp;&mdash; Oscar Wilde
+> &ensp;&mdash; Oscar Wilde
 
-``FFTW-Age`` is a lightweight  C++ software package for generating FFTW wisdom
-files for OpenMP-multithreaded 3-d FFT transforms as a replacement for
+``FFTW-Age`` is a lightweight C++ utility for generating FFTW wisdom files
+for OpenMP-multithreaded 3&#8209;d FFT transforms as a replacement for
 [`fftw-wisdom`]( https://www.fftw.org/fftw-wisdom.1.html).
 
 
 ## Installation
 
-The C++ program can be set up with `make`, provided that dependency
-requirements are satisfied (FFTW3 and OpenMP libraries).
+The C++ program can built with `make`, provided that dependency
+requirements (FFTW3 and OpenMP libraries) are satisfied.
 
 > [!IMPORTANT]
-> Ensure the C++ compiler used supports OpenMP and
-> the FFTW3 library is installed/configured accordingly.
-> The default [``Makefile``](Makefile) (located at the repository directory root)
-> assumes the GCC compiler and OpenMP library.
+> Ensure the C++ compiler used supports OpenMP and the FFTW3 library is
+> installed/configured accordingly. The default [``Makefile``](Makefile)
+> (located at the repository directory root) assumes the GCC compiler and
+> OpenMP library.
 
-First `git clone` the desired branch/release from the GitHub repository and
-change into the repository directory path:
+First `git clone` the desired branch/release from the GitHub repository
+and change into the repository directory path:
 
 ```console
 $ git clone git@github.com:MikeSWang/FFTW-Age.git --branch <branch-or-release>
@@ -30,22 +30,23 @@ $ cd FFTW-Age
 Then, execute in shell:
 
 ```console
-$ make clean && make install
+$ make clean
+$ make install
 ```
 
 
-## Documentation
+## Usage
 
-Once installed, the FFTW-Age program can be called from the command line:
+Once installed, the FFTW-Age utility can be called from the command line:
 
 ```console
-$ fftw-age [--rigour <tplan>] [--outdir <wisdom-dir>] <tdir>-<dimx>x<dimy>x<dimz>
+$ fftw-age [--rigour=<tplan>] [--outdir=<wisdom-dir>] <tdir>-<dimx>x<dimy>x<dimz>
 ```
 
 where
 
-- `fftw-age` is assumed to be in the current working directory,
-  or else replace it with the correct path;
+- `fftw-age` is assumed to be executable (include the path if it is not
+  in the current working directory);
 - ``<tdir>`` is the transform direction,
   either ``"f"`` for ``FFTW_FORWARD`` and ``"b"`` for ``FFTW_BACKWARD``;
 - ``<dimx>``, ``<dimy>`` and ``<dimz>`` are the dimensions of the 3-d transform;
@@ -75,8 +76,8 @@ for the relevant information.
 
 ## Acknowledgement
 
-This C++ package makes use of the ``argparse`` library from
-[``p-ranav/argparse``](https://github.com/p-ranav/argparse).
+This C++ utility makes use of the [``argparse``](
+https://github.com/p-ranav/argparse) library.
 
 
 ## Contributing/Development

@@ -1,10 +1,11 @@
-name: dev
+name: fftw-age-dev
 category: dev
 channels:
   - conda-forge
 dependencies:
   # Build dependencies
-  - pkg-config
-  - fftw >= 3
+  - cxx-compiler
   - libgomp
   - llvm-openmp
+  - pkg-config
+  - fftw >= 3
