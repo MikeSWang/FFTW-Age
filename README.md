@@ -1,5 +1,8 @@
 # ``FFTW-Age``: FFTW Wisdom Generation
 
+[![CI](https://img.shields.io/github/actions/workflow/status/MikeSWang/FFTW-Age/ci.yml?label=ci&logo=GitHubActions)](https://github.com/MikeSWang/FFTW-Age/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/MikeSWang/FFTW-Age?display_name=tag&sort=semver&logo=Git)](https://github.com/MikeSWang/FFTW-Age/releases/latest)
+
 > "_With age comes wisdom, but sometimes age comes alone._"
 > &ensp;&mdash; Oscar Wilde
 
