@@ -1,0 +1,26 @@
+👋 Welcome to FFTW-Age-Dev Container in GitHub Codespaces!
+
+🚦 Contribution guidelines:
+
+    https://github.com/MikeSWang/FFTW-Age/blob/main/.github/CONTRIBUTING.md
+
+🔧 Development environment:
+
+    This codespace container is managed by Miniconda. It contains the
+    Conda environment 'dev' set up by `micromamba` with all dependencies
+    installed from the 'conda-forge' channel. The VS Code editor is
+    pre-configured with extensions for C++ development.
+
+To start your development, activate the pre-configured environment:
+
+    $ micromamba activate dev
+
+To build the project, execute:
+
+    $ make clean && make -j -O install
+
+This will produce the binary executable at build/bin/fftw-age.
+
+To see this message again, enter:
+
+    $ welcome-notice

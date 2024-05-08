@@ -1,0 +1,10 @@
+name: dev
+category: dev
+channels:
+  - conda-forge
+dependencies:
+  # Build dependencies
+  - pkg-config
+  - fftw >= 3
+  - libgomp
+  - llvm-openmp

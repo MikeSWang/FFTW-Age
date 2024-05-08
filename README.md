@@ -1,6 +1,6 @@
 # ``FFTW-Age``: FFTW Wisdom Generation
 
-> _With age comes wisdom, but sometimes age comes alone._
+> "_With age comes wisdom, but sometimes age comes alone._"
 > &emsp;&mdash; Oscar Wilde
 
 ``FFTW-Age`` is a lightweight  C++ software package for generating FFTW wisdom
