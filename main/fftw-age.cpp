@@ -17,7 +17,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-
 /**
  * @file fftw-age.cpp
  * @author Mike S Wang (https://github.com/MikeSWang)
@@ -37,57 +36,107 @@
 #include <stdexcept>
 #include <string>
 
+#include "argparse.hpp"
 #include "gen_fftw_wisdom.hpp"
 
 using namespace fftw_age;
 
 int main(int argc, char* argv[]) {
-  // Declare fixed arguments.
-  char ARG_TTARR[16] = "i";  // in-place
-  char arg_ttype[16] = "c";  // complex-to-complex
 
-  // Parse command line arguments.
-  char* arg_tplan = argv[1];
-  char* arg_tdir = argv[2];
-  long long dimx = atoi(argv[3]);
-  long long dimy = atoi(argv[4]);
-  long long dimz = atoi(argv[5]);
-  char* wisdom_dir = argv[6];
+  // UPDATE
+  std::string PROGNAME = "fftw-age";
+  std::string VERSION = "0.1.0";
+
+  // Declare command-line arguments.
+  argparse::ArgumentParser program(PROGNAME, VERSION);
+
+  program.add_argument("transform")
+    .help(
+      "FFTW transform specification: "
+      "<ttype><ttarr><tdir>-<dimx>x<dimy>x<dimz>, where "
+      "the transform type <ttype> is "
+        "'c' (fixed) for complex-to-complex, "
+      "the transform array <ttarr> is "
+        "'i' (fixed) for in-place, "
+      "the transform direction <tdir> is "
+        "'f' for forward or "
+        "'b' for backward, and "
+      "the dimensions of the transform are (<dimx>, <dimy>, <dimz>)"
+    );
+  program.add_argument("-r", "--rigour")
+    .help(
+      "FFTW planner flag/rigour: "
+        "'m' for measured or "
+        "'p' for patient")
+    .required()
+    .default_value(std::string("m"));
+  program.add_argument("-o", "--outdir")
+    .help("FFTW wisdom output directory")
+    .required()
+    .default_value(std::string("."));
+
+  program.parse_args(argc, argv);
+
+  if (program.get<bool>("help")) {
+    std::cout << program << std::endl;
+    return 0;
+  }
+
+  // Parse command-line arguments.
+  std::string _transform_str = program.get<std::string>("transform");
+  std::size_t _split = _transform_str.find('-');
+
+  std::string _tspec_str = _transform_str.substr(0, _split);
+  std::string tdir_str = _tspec_str.substr(_tspec_str.length() - 1);
+
+  std::string _tsize_str = _transform_str.substr(_split + 1);
+  std::size_t _split_xy = _tsize_str.find('x');
+  std::size_t _split_yz = _tsize_str.find('x', _split_xy + 1);
+
+  long long dimx, dimy, dimz;
+  dimx = std::stoll(_tsize_str.substr(0, _split_xy));
+  dimy = std::stoll(_tsize_str.substr(_split_xy + 1, _split_yz - _split_xy - 1));
+  dimz = std::stoll(_tsize_str.substr(_split_yz + 1));
+
+  std::string tplan_str = program.get<std::string>("rigour");
+  std::string wisdom_dir = program.get<std::string>("outdir");
+
+  // Declare fixed arguments.
+  char ARG_TTYPE[16] = "c";  // complex-to-complex
+  char ARG_TTARR[16] = "i";  // in-place
 
   // Parse environmental variables.
   int nthreads = omp_get_max_threads();
 
   // Derive FFTW specification.
   TransformType ttype;
-  if (std::strcmp(arg_ttype, "c") == 0) {
+  if (std::strcmp(ARG_TTYPE, "c") == 0) {
     ttype = TransformType::C2C;
   } else {
     std::string err_mesg =
-      "Unsupported transform type: " + std::string(arg_ttype);
+      "Unsupported transform type: " + std::string(ARG_TTYPE);
     throw std::invalid_argument(err_mesg.c_str());
   }
 
   TransformDirection tdir;
-  if (std::strcmp(arg_tdir, "f") == 0) {
+  if (tdir_str == "f") {
     tdir = TransformDirection::FORWARD;
   } else
-  if (std::strcmp(arg_tdir, "b") == 0) {
+  if (tdir_str == "b") {
     tdir = TransformDirection::BACKWARD;
   } else {
-    std::string err_mesg =
-      "Invalid transform direction: " + std::string(arg_tdir);
+    std::string err_mesg = "Invalid transform direction: " + tdir_str;
     throw std::invalid_argument(err_mesg.c_str());
   }
 
   TransformPlanner tplan;
-  if (std::strcmp(arg_tplan, "m") == 0) {
+  if (tplan_str == "m") {
     tplan = TransformPlanner::MEASURE;
   } else
-  if (std::strcmp(arg_tplan, "p") == 0) {
+  if (tplan_str == "p") {
     tplan = TransformPlanner::PATIENT;
   } else {
-    std::string err_mesg =
-      "Unsupported transform planner: " + std::string(arg_tplan);
+    std::string err_mesg = "Unsupported transform planner: " + tplan_str;
     throw std::invalid_argument(err_mesg.c_str());
   }
 
@@ -95,11 +144,11 @@ int main(int argc, char* argv[]) {
   std::string wfile_prefix = std::string(wisdom_dir) + "/" + "fftw_omp_";
   std::string wfile_suffix = ".wisdom";
   std::string wfile_tag =
-    std::string(arg_ttype) + std::string(ARG_TTARR) + std::string(arg_tdir)
+    std::string(ARG_TTYPE) + std::string(ARG_TTARR) + tdir_str
     + "_" + std::to_string(dimx)
     + "x" + std::to_string(dimy)
     + "x" + std::to_string(dimz)
-    + "_" + std::string(arg_tplan);
+    + "_" + tplan_str;
 
   std::string wisdom_file = wfile_prefix + wfile_tag + wfile_suffix;
 

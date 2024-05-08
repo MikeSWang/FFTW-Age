@@ -39,18 +39,19 @@ $ make clean && make install
 Once installed, the FFTW-Age program can be called from the command line:
 
 ```console
-$ fftw-age <tplan> <tdir> <dimx> <dimy> <dimz> <wisdom-dir>
+$ fftw-age [--rigour <tplan>] [--outdir <wisdom-dir>] <tdir>-<dimx>x<dimy>x<dimz>
 ```
 
 where
 
 - `fftw-age` is assumed to be in the current working directory,
   or else replace it with the correct path;
-- ``<tplan>`` corresponds to a FFTW planner flag,
-  with ``"m"`` for ``FFTW_MEASURE`` and ``"p"`` for ``FFTW_PATIENT``;
 - ``<tdir>`` is the transform direction,
   either ``"f"`` for ``FFTW_FORWARD`` and ``"b"`` for ``FFTW_BACKWARD``;
 - ``<dimx>``, ``<dimy>`` and ``<dimz>`` are the dimensions of the 3-d transform;
+- ``<tplan>`` corresponds to the FFTW planner flag/rigour level,
+  with ``"m"`` (measured; default) for ``FFTW_MEASURE``
+  and ``"p"`` (patient) for ``FFTW_PATIENT``;
 - ``<wisdom-dir>`` is the output wisdom file directory
   (absolute or relative to the current working directory).
 
@@ -68,6 +69,12 @@ The output wisdom file will have the filename
 To acknowledge the use of ``FFTW-Age`` in your published research, please
 cite this repository; you can refer to the file [``CITATION.cff``](CITATION.cff)
 for the relevant information.
+
+
+## Acknowledgement
+
+This C++ package makes use of the ``argparse`` library from
+[``p-ranav/argparse``](https://github.com/p-ranav/argparse).
 
 
 ## Contributing/Development
