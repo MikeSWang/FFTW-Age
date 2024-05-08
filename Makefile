@@ -119,7 +119,7 @@ endif  # OS
 
 INCLUDES += -I${DIR_INCLUDE} ${DEP_INCLUDES}
 CPPFLAGS += -MMD -MP
-CXXFLAGS += -Wall -O3 ${DEP_CXXFLAGS} ${OMP_CXXFLAGS}
+CXXFLAGS += -std=c++17 -Wall -O3 ${DEP_CXXFLAGS} ${OMP_CXXFLAGS}
 LDFLAGS += \
 	$(addprefix -Wl${COMMA}-rpath${COMMA},$(patsubst -L%,%,${DEP_LDFLAGS})) \
 	${DEP_LDFLAGS} \
