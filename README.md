@@ -28,16 +28,16 @@ requirements (FFTW3 and OpenMP libraries) are satisfied.
 First `git clone` the desired branch/release from the GitHub repository
 and change into the repository directory path:
 
-```console
-$ git clone git@github.com:MikeSWang/FFTW-Age.git --branch <branch-or-release>
-$ cd FFTW-Age
+```bash session
+git clone git@github.com:MikeSWang/FFTW-Age.git --branch <branch-or-release>
+cd FFTW-Age
 ```
 
 Then, execute in shell:
 
-```console
-$ make clean
-$ make install
+```bash session
+make clean
+make install
 ```
 
 
@@ -45,8 +45,8 @@ $ make install
 
 Once installed, the FFTW-Age utility can be called from the command line:
 
-```console
-$ fftw-age [--rigour=<tplan>] [--outdir=<wisdom-dir>] <tdir>-<dimx>x<dimy>x<dimz>
+```bash session
+fftw-age [--rigour=<tplan>] [--outdir=<wisdom-dir>] <tdir>-<dimx>x<dimy>x<dimz>
 ```
 
 where
