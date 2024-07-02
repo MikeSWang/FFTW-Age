@@ -1,7 +1,8 @@
 # ``FFTW-Age``: FFTW Wisdom Generation
 
-[![CI](https://img.shields.io/github/actions/workflow/status/MikeSWang/FFTW-Age/ci.yml?label=ci&logo=GitHubActions)](https://github.com/MikeSWang/FFTW-Age/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/MikeSWang/FFTW-Age?display_name=tag&sort=semver&logo=Git)](https://github.com/MikeSWang/FFTW-Age/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/MikeSWang/FFTW-Age/ci.yml?label=ci&logo=GitHubActions)](https://github.com/MikeSWang/FFTW-Age/actions/workflows/ci.yml)
+[![Codacy-Badge](https://app.codacy.com/project/badge/Grade/6e18472a2f9c447aaf35a66cbcf2f633)](https://app.codacy.com/gh/MikeSWang/FFTW-Age/dashboard?utm_source=gh&utm_campaign=Badge_grade)
 
 > "_With age comes wisdom, but sometimes age comes alone._"
 > &ensp;&mdash; Oscar Wilde
@@ -91,13 +92,15 @@ https://github.com/p-ranav/argparse) library.
 
 ## Contributing/Development
 
-[![ReleaseDate](https://img.shields.io/github/release-date-pre/MikeSWang/FFTW-Age)](https://github.com/MikeSWang/FFTW-Age/releases/latest)
-![CommitsSince](https://img.shields.io/github/commits-since/MikeSWang/FFTW-Age/latest/main)
+[![Release-Date](https://img.shields.io/github/release-date-pre/MikeSWang/FFTW-Age)](https://github.com/MikeSWang/FFTW-Age/releases/latest)
+![Commits-Since](https://img.shields.io/github/commits-since/MikeSWang/FFTW-Age/latest/main)
 
 [![Build-Issues](https://img.shields.io/github/issues/MikeSWang/FFTW-Age/build)](https://github.com/MikeSWang/FFTW-Age/issues?q=is%3Aopen+is%3Aissue+label%3Abuild)
 [![Bug-Issues](https://img.shields.io/github/issues/MikeSWang/FFTW-Age/bug)](https://github.com/MikeSWang/FFTW-Age/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 [![Feature-Issues](https://img.shields.io/github/issues/MikeSWang/FFTW-Age/feature)](https://github.com/MikeSWang/FFTW-Age/issues?q=is%3Aopen+is%3Aissue+label%3Afeature)
-[![PullRequests](https://img.shields.io/github/issues-pr/MikeSWang/FFTW-Age)](https://github.com/MikeSWang/FFTW-Age/pulls)
+[![Pull-Requests](https://img.shields.io/github/issues-pr/MikeSWang/FFTW-Age)](https://github.com/MikeSWang/FFTW-Age/pulls)
+
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 [![Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/MikeSWang/FFTW-Age?hide_repo_select=true&ref=main)
 
@@ -128,7 +131,7 @@ Release notes are included in the [change log](CHANGELOG.md).
 
 ``FFTW-Age`` is made freely available under the [GPL-3.0 licence](
 https://www.gnu.org/licenses/gpl-3.0.en.html) (or any later version).
-Please see [``LICENCE``](LICENCE) (located at the repository directory root)
+Please see [``LICENCE``](./LICENCE) (located at the repository directory root)
 for full terms and conditions.
 
 &copy; 2024 Mike S Wang
