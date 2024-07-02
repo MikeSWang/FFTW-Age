@@ -11,7 +11,7 @@ repos:
       - id: check-added-large-files
         args: ['--enforce-all',]
         exclude: "^(\
-            CHANGELOG.md|\
+          CHANGELOG.md|\
         )$"
       - id: check-executables-have-shebangs
       - id: check-json
@@ -20,7 +20,7 @@ repos:
       - id: check-yaml
         exclude: "(\
           .*.github/.*|\
-          deploy/pkg/conda_recipe.*/meta.yaml\
+          deploy/pkg/conda_recipe.*/meta.yaml|\
         )"
       - id: detect-private-key
       - id: end-of-file-fixer

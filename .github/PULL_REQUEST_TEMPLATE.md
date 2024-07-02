@@ -1,12 +1,3 @@
----
-name: Pull Request
-about: Send a pull request
-title: "[PR] <insert-pull-request-title>"
-labels: pull-request
-assignees: MikeSWang
-
----
-
 ## Relates to
 
 If this pull request is related to (an) issue(s), please add the link(s) here.
