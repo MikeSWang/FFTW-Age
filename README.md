@@ -2,6 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/MikeSWang/FFTW-Age?display_name=tag&sort=semver&logo=Git)](https://github.com/MikeSWang/FFTW-Age/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/MikeSWang/FFTW-Age/ci.yml?label=ci&logo=GitHubActions)](https://github.com/MikeSWang/FFTW-Age/actions/workflows/ci.yml)
+[![pre-commit.ci-Status](https://results.pre-commit.ci/badge/github/MikeSWang/FFTW-Age/main.svg)](https://results.pre-commit.ci/latest/github/MikeSWang/FFTW-Age/main)
 [![Codacy-Badge](https://app.codacy.com/project/badge/Grade/6e18472a2f9c447aaf35a66cbcf2f633)](https://app.codacy.com/gh/MikeSWang/FFTW-Age/dashboard?utm_source=gh&utm_campaign=Badge_grade)
 
 > "_With age comes wisdom, but sometimes age comes alone._"
