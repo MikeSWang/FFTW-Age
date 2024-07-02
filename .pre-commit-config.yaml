@@ -1,0 +1,39 @@
+ci:
+  autofix_prs: true
+  autofix_commit_msg: "[pre-commit.ci] Auto-fixes from pre-commit.com hooks"
+  autoupdate_commit_msg: "[pre-commit.ci] Auto-update `pre-commit` hooks"
+  autoupdate_schedule: 'weekly'
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-added-large-files
+        args: ['--enforce-all',]
+        exclude: "^(\
+            CHANGELOG.md|\
+        )$"
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-yaml
+        exclude: "(\
+          .*.github/.*|\
+          deploy/pkg/conda_recipe.*/meta.yaml\
+        )"
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: pretty-format-json
+        args: ['--autofix', '--no-sort-keys', '--no-ensure-ascii']
+        exclude: "(\
+          .*.vscode/.*|\
+        )"
+      - id: trailing-whitespace
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        args: ['--write-changes']
