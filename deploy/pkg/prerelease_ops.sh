@@ -2,8 +2,11 @@
 #
 # @file prerelease_ops.sh
 # @author Mike S Wang
-# @brief Pre-release operations.
+# @brief Pre-release operations in dry-run mode.
 #
 
-semantic-release --config .semrelrc.toml --noop version --print 2> /dev/null
-semantic-release --config .semrelrc.toml changelog 2> /dev/null
+THIS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+export PYTHONPATH="${PYTHONPATH}:${THIS_DIR}"
+
+semantic-release -v --config .semrelrc.toml changelog 2> /dev/null
+semantic-release -v --config .semrelrc.toml --noop version --no-push # 2> /dev/null
