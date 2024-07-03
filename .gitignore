@@ -14,6 +14,13 @@ build/*
 *.out
 
 
+# Development
+# -----------
+
+## CI generated
+deploy/pkg/patches/**
+
+
 # Miscellaneous
 # -------------
 
@@ -39,6 +46,8 @@ storage/*
 !build/bin/
 build/bin/*
 !build/bin/.gitkeep
+
+!deploy/pkg/patches/.gitkeep
 
 !storage/wisdom/
 storage/wisdom/*
