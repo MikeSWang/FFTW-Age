@@ -39,7 +39,7 @@ repos:
         args: ['--write-changes']
 
   - repo: https://github.com/espressif/conventional-precommit-linter
-    rev: v1.9.0
+    rev: v1.10.0
     hooks:
       - id: conventional-precommit-linter
         stages: [commit-msg]
