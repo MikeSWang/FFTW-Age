@@ -1,4 +1,6 @@
-// Copyright (C) [GPLv3 Licence]
+// FFTW-Age: FFTW Wisdom Generation
+//
+// Copyright (C) 2024 Mike S Wang [GPL-3.0]
 //
 // This file is part of the FFTW-Age program. See the COPYRIGHT
 // and LICENCE files at the top-level directory of this distribution
@@ -29,23 +31,41 @@
  *
  */
 
-#include <fftw3.h>
-#include <omp.h>
-
 #include <cstring>
 #include <stdexcept>
 #include <string>
 
+#include <fftw3.h>
+#include <omp.h>
+
 #include "argparse.hpp"
 #include "gen_fftw_wisdom.hpp"
+
+// UPDATE
+#define _FFTW_AGE_NAME "fftw-age"
+#define _FFTW_AGE_VERSION "0.1.1"
+
+#define _FFTW_VERSION std::string(fftw_version)
+#define _OMP_VERSION std::to_string(_OPENMP)
+#define _OMP_NTHREADS std::to_string(omp_get_max_threads())
 
 using namespace fftw_age;
 
 int main(int argc, char* argv[]) {
 
-  // UPDATE
-  std::string PROGNAME = "fftw-age";
-  std::string VERSION = "0.1.0";
+  std::string PROGNAME = _FFTW_AGE_NAME;
+
+  std::string version_line = PROGNAME + " version " + _FFTW_AGE_VERSION + "\n";
+  std::string licence_note =
+    "Copyright (C) 2024 Mike S Wang                                        \n"
+    "This program comes with ABSOLUTELY NO WARRANTY. This is free software,\n"
+    "and you are welcome to redistribute it under certain conditions; see  \n"
+    "the source for details.                                               \n";
+  std::string lib_info =
+    "FFTW version: " + _FFTW_VERSION + "\n"
+    + "OpenMP version: " + _OMP_VERSION + "\n"
+    + "Thread number: " + _OMP_NTHREADS + "\n";
+  std::string VERSION = version_line + licence_note + lib_info;
 
   // Declare command-line arguments.
   argparse::ArgumentParser program(PROGNAME, VERSION);

@@ -1,4 +1,6 @@
-// Copyright (C) [GPLv3 Licence]
+// FFTW-Age: FFTW Wisdom Generation
+//
+// Copyright (C) 2024 Mike S Wang [GPL-3.0]
 //
 // This file is part of the FFTW-Age program. See the COPYRIGHT
 // and LICENCE files at the top-level directory of this distribution
@@ -26,13 +28,13 @@
 #ifndef FFTW_AGE_INCLUDE_GEN_FFTW_WISDOM_HPP_INCLUDED_
 #define FFTW_AGE_INCLUDE_GEN_FFTW_WISDOM_HPP_INCLUDED_
 
-#include <fftw3.h>
-#include <omp.h>
-
 #include <cstdarg>
 #include <cstdio>
 #include <stdexcept>
 #include <string>
+
+#include <fftw3.h>
+#include <omp.h>
 
 namespace fftw_age {
 

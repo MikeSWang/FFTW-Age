@@ -1,4 +1,6 @@
-// Copyright (C) [GPLv3 Licence]
+// FFTW-Age: FFTW Wisdom Generation
+//
+// Copyright (C) 2024 Mike S Wang [GPL-3.0]
 //
 // This file is part of the FFTW-Age program. See the COPYRIGHT
 // and LICENCE files at the top-level directory of this distribution
