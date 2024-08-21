@@ -93,6 +93,8 @@ https://github.com/p-ranav/argparse) library.
 
 ## Contributing/Development
 
+![C++-Standard](https://img.shields.io/badge/std-c%2B%2B17-informational?logo=cplusplus)
+
 [![Release-Date](https://img.shields.io/github/release-date-pre/MikeSWang/FFTW-Age)](https://github.com/MikeSWang/FFTW-Age/releases/latest)
 ![Commits-Since](https://img.shields.io/github/commits-since/MikeSWang/FFTW-Age/latest/main)
 
