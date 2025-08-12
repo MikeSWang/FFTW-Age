@@ -62,7 +62,7 @@ jobs:
           xcode-version: latest-stable
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install C++ build dependency requirements
         uses: knicknic/os-specific-run@v1.0.4
